@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Check Emails";
+}
+
+<h1>Check Emails (@ViewBag.Protocol)</h1>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+@if (ViewBag.Messages != null)
+{
+    <h3>Recent Emails</h3>
+    <ul>
+        @foreach (var message in ViewBag.Messages)
+        {
+            <li>@message</li>
+        }
+    </ul>
+}
+
+<p>
+    <a asp-action="Index">Back to List</a>
+</p>

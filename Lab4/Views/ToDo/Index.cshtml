@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ToDo>
+
+<h2>To Do</h2>
+<a asp-action="Create" class="btn btn-success mb-3">Create New</a>
+<table class="table table-bordered table-striped ">
+    <thead>
+        <tr class="bg-warning ">
+            <td>Title</td>
+            <td>Date</td>
+            <td>Status</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.DateCreated</td>
+                <td>@(item.Status ? "Done" : "Pending")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+                <td>
+                    <form asp-action="SendTaskEmail" method="post">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <input type="email" name="toEmail" placeholder="Recipient Email" required />
+                        <button type="submit">Send Task</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a asp-action="CheckEmails" asp-route-protocol="IMAP">Check Emails (IMAP)</a> |
+    <a asp-action="CheckEmails" asp-route-protocol="POP3">Check Emails (POP3)</a>
+</p>
