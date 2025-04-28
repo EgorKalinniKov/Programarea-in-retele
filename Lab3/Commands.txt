@@ -1,0 +1,6 @@
+docker build -t mssql-custom -f Dockerfile.db .
+docker build -t todo -f Dockerfile.app .
+
+docker network create lab3
+docker run -d -p 1433:1433 --name mssql --network lab3 mssql-custom
+docker run -d --name todo3  --network lab3  -p 5000:8080 -e ASPNETCORE_ENVIRONMENT=Development -e ConnectionStrings__DefaultConnection="Server=mssql;Database=ToDo_db;User=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=true" todo

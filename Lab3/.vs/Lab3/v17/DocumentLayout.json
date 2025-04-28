@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\CodesWork\\Labs\\PR\\Lab3\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3FF03312-9628-4546-9E01-A7037C9285D2}|Lab3.csproj|c:\\codeswork\\labs\\pr\\lab3\\commands.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3FF03312-9628-4546-9E01-A7037C9285D2}|Lab3.csproj|solutionrelative:commands.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Commands.txt",
+              "DocumentMoniker": "C:\\CodesWork\\Labs\\PR\\Lab3\\Commands.txt",
+              "RelativeDocumentMoniker": "Commands.txt",
+              "ToolTip": "C:\\CodesWork\\Labs\\PR\\Lab3\\Commands.txt",
+              "RelativeToolTip": "Commands.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-04-28T10:02:48.564Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
