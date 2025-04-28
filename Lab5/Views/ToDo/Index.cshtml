@@ -1,0 +1,74 @@
+﻿@using Lab5
+@using Lab5.Models
+@model IEnumerable<ToDo>
+
+<h2>To Do</h2>
+<a asp-action="Create" class="btn btn-success mb-3">Create New</a>
+<table id="toDoTable" class="table table-bordered table-striped">
+    <thead>
+        <tr class="bg-warning ">
+            <td>Title</td>
+            <td>Date</td>
+            <td>Status</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.DateCreated</td>
+                <td>@(item.Status ? "Done" : "Pending")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="~/lib/signalr/signalr.min.js"></script>
+    <script>
+        // Подключение к хабу
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/todoHub")
+            .build();
+
+        // Обработка обновления списка задач
+        connection.on("ReceiveToDoUpdate", function () {
+            const currentTable = document.querySelector('#toDoTable');
+            if (!currentTable) {
+                console.error("Элемент #toDoTable не найден на текущей странице");
+                return;
+            }
+
+            fetch('/ToDo/Index')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Ошибка HTTP: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newTable = doc.querySelector('#toDoTable');
+                    if (!newTable) {
+                        console.error("Элемент #toDoTable не найден в полученном HTML. HTML:", html);
+                        return;
+                    }
+                    currentTable.replaceWith(newTable);
+                })
+                .catch(err => console.error('Ошибка обновления:', err));
+        });
+
+        // Запуск соединения
+        connection.start()
+            .then(() => console.log("SignalR подключен"))
+            .catch(err => console.error('Ошибка подключения SignalR:', err));
+    </script>
+}
